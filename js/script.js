@@ -1,4 +1,20 @@
-var argMoveId, argPlayerMove, argComputerMove, computerMove, playerMove, randomNumber, playerInput;
+const buttonRock = document.getElementById('button-rock');
+const buttonPaper = document.getElementById('button-paper');
+const buttonScissors = document.getElementById('button-scissors');
+
+/**
+ * Describe this function...
+ */
+function buttonClicked(playerMove) {
+  clearMessages();
+  console.log(playerMove + ' został kliknięty');
+
+  const randomNumber = Math.floor(Math.random() * 3 + 1);
+  console.log('wylosowana liczba to: ' + randomNumber);
+  const computerMove = getMoveName(randomNumber);
+  console.log('ruch komputera to: ' + computerMove);
+  displayResult(playerMove, computerMove);
+}
 
 /**
  * Describe this function...
@@ -12,7 +28,7 @@ function getMoveName(argMoveId) {
     return 'papier';
   }
   else if (argMoveId == 3) {
-      return 'nożyce';
+    return 'nożyce';
   }
   else {
     printMessage('Nie znam ruchu o id ' + argMoveId + '. Zakładam, że chodziło o "kamień".');
@@ -29,25 +45,21 @@ function displayResult(argPlayerMove, argComputerMove) {
     printMessage('Wygrywasz!');
   }
   else if (argPlayerMove == 'kamień' && argComputerMove == 'nożyce') {
-        printMessage('Wygrywasz!');
-    }
+    printMessage('Wygrywasz!');
+  }
   else if (argPlayerMove == 'nożyce' && argComputerMove == 'papier') {
-        printMessage('Wygrywasz!');
+    printMessage('Wygrywasz!');
   }
   else if (argPlayerMove == argComputerMove) {
-        printMessage('Remis!');
+    printMessage('Remis!');
   }
   else {
     printMessage('Przegrywasz :(');
   }
   printMessage('Zagrałem ' + argComputerMove + ', a Ty ' + argPlayerMove);
 }
-playerInput = prompt('Wybierz swój ruch! 1: kamień, 2: papier, 3: nożyce.');
-console.log('wybór ruchu gracza to: ' + playerInput);
-playerMove = getMoveName(playerInput);
-console.log('ruch gracza to: ' + playerMove);
-randomNumber = Math.floor(Math.random() * 3 + 1);
-console.log('wylosowana liczba to: ' + randomNumber);
-computerMove = getMoveName(randomNumber);
-console.log('ruch komputera to: ' + computerMove);
-displayResult(playerMove, computerMove);
+
+buttonRock.addEventListener('click', function(){buttonClicked('kamień'); });
+buttonPaper.addEventListener('click', function(){buttonClicked('papier'); });
+buttonScissors.addEventListener('click', function(){buttonClicked('nożyce'); });
+
